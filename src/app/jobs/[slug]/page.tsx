@@ -277,10 +277,15 @@ export default function JobDetailPage() {
                   <div style={{ background: '#F0F9FF', border: '1px solid #BAE6FD', borderRadius: 10, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
                     <AlertCircle size={16} color="#0284C7" />
                     <p style={{ fontSize: 13, color: '#0369A1' }}>
-                      Source: <strong>{job.commission}</strong>, original advertisement from{' '}
-                      <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#0284C7', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                        {job.sourceUrl} <ExternalLink size={11} />
-                      </a>
+                      Source: <strong>{job.commission}</strong>
+                      {job.sourceUrl && (
+                        <>
+                          , original advertisement from{' '}
+                          <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#0284C7', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                            {job.sourceUrl} <ExternalLink size={11} />
+                          </a>
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
