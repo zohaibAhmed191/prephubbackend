@@ -31,7 +31,7 @@ declare global {
 }
 
 export default function AuthModal({ isOpen, onClose, defaultTab = 'login' }: AuthModalProps) {
-  const { login, register, loginWithGoogle, resendVerification, completeProfile } = useAuth();
+  const { login, register, loginWithGoogle, resendVerification, completeProfile, googleClientId } = useAuth();
 
   const [tab, setTab] = useState<'login' | 'register' | 'forgot'>(defaultTab);
   const [showPassword, setShowPassword] = useState(false);
@@ -84,7 +84,7 @@ export default function AuthModal({ isOpen, onClose, defaultTab = 'login' }: Aut
   // on the login/register tabs (not needed on the complete-profile step).
   useEffect(() => {
     if (!isOpen || needsProfile || tab === 'forgot') return;
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+    const clientId = googleClientId;
     if (!clientId || !googleBtnRef.current) return;
 
     let cancelled = false;
@@ -125,7 +125,7 @@ export default function AuthModal({ isOpen, onClose, defaultTab = 'login' }: Aut
       clearInterval(interval);
       clearTimeout(giveUpAfter);
     };
-  }, [isOpen, tab, needsProfile, handleGoogleCredential]);
+  }, [isOpen, tab, needsProfile, handleGoogleCredential, googleClientId]);
 
   if (!isOpen) return null;
 
@@ -494,7 +494,7 @@ export default function AuthModal({ isOpen, onClose, defaultTab = 'login' }: Aut
                 <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
               </div>
               <div ref={googleBtnRef} style={{ display: 'flex', justifyContent: 'center', minHeight: 40 }} />
-              {!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
+              {!googleClientId && (
                 <p style={{ fontSize: 11, color: 'var(--muted-light)', textAlign: 'center', marginTop: 6 }}>
                   Google sign-in isn&apos;t configured yet.
                 </p>

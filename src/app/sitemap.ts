@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next';
 import type { Job } from '@/lib/api';
 
-// Set NEXT_PUBLIC_SITE_URL in production if the live domain differs.
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://prephubpk.com').replace(/\/$/, '');
+// Set SITE_URL in production if the live domain differs.
+const SITE_URL = (process.env.SITE_URL || 'https://prephubpk.com').replace(/\/$/, '');
 // Server-side only, talks to the backend directly rather than bouncing
 // through this same Next.js server's own /api rewrite.
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000';

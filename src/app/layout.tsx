@@ -6,9 +6,9 @@ import { Toaster } from "react-hot-toast";
 
 const siteTitle = "PrepHub PK - Pakistan's #1 Government Job Preparation Platform";
 const siteDescription = "Find FPSC, PPSC, SPSC, NTS, CSS, NPF job alerts and prepare with MCQs, mock tests, and study material. Free for everyone.";
-// Set NEXT_PUBLIC_SITE_URL in production if the live domain differs, this
+// Set SITE_URL in production if the live domain differs, this
 // is what canonical/OG URLs resolve against (also used by sitemap.ts/robots.ts).
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://prephubpk.com';
+const SITE_URL = process.env.SITE_URL || 'https://prephubpk.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
       </head>
       <body suppressHydrationWarning>
-        <AuthProvider>
+        <AuthProvider googleClientId={process.env.GOOGLE_CLIENT_ID || ''}>
           {children}
           <Toaster position="top-center" toastOptions={{ duration: 4000 }} />
         </AuthProvider>

@@ -11,11 +11,14 @@ interface AuthContextValue {
   logout: () => Promise<void>;
   completeProfile: (data: { first_name?: string; last_name?: string; phone: string; province: string }) => Promise<void>;
   resendVerification: (email: string) => Promise<void>;
+  googleClientId: string;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+// googleClientId is read from the server-only GOOGLE_CLIENT_ID env var in
+// app/layout.tsx and passed down here, so no NEXT_PUBLIC_ variable is needed.
+export function AuthProvider({ children, googleClientId = '' }: { children: ReactNode; googleClientId?: string }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -70,7 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout, completeProfile, resendVerification }}>
+    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout, completeProfile, resendVerification, googleClientId }}>
       {children}
     </AuthContext.Provider>
   );
