@@ -95,6 +95,10 @@ export interface Job {
   prepReady: boolean;
   mcqs?: Mcq[];
   materials?: Material[];
+  // Optional per-job SEO overrides set in the admin. When empty, the job
+  // page falls back to a default title/description (see jobs/[slug]/layout.tsx).
+  metaTitle?: string | null;
+  metaDescription?: string | null;
 }
 
 // SEO-friendly job URL: /jobs/{slug}. The slug is a real, unique, admin-
