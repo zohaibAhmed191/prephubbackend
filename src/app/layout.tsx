@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next";
 
 const siteTitle = "PrepHub PK - Pakistan's #1 Government Job Preparation Platform";
 const siteDescription = "Find FPSC, PPSC, SPSC, NTS, CSS, NPF job alerts and prepare with MCQs, mock tests, and study material. Free for everyone.";
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Toaster position="top-center" toastOptions={{ duration: 4000 }} />
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
